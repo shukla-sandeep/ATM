@@ -1,0 +1,70 @@
+
+<div class="well">
+    <div *ngIf="state==='cardDetails'">
+        <h3>Enter Card Details</h3>
+        <div class="form-group">
+            <label for="cardNumber">Card Number</label>
+            <input type="text" maxlength="16" class="form-control" id="cardNumber" name="cardNumber" placeholder="Please enter card number" (keyup)="onKey($event)" [(ngModel)]="cardNumber">
+        </div>
+        <div class="form-group">
+            <label for="pin">Pin</label>
+            <input type="password" class="form-control" maxlength="4" id="pin" name="pin" placeholder="Password" [(ngModel)]="pin">
+        </div>
+        <button type="button" class="btn btn-primary" (click)="enterCardDetails()" [disabled]="!(cardNumber.length == 16 && pin.length == 4)">Enter</button>
+    </div>
+    <div *ngIf="state==='selectAccount'">
+        <h3>Select Account</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="accountRadios" id="Cheque" value="c" (click)="onSelectAccount('c')">
+            <label class="form-check-label" for="Cheque">
+                Cheque
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="accountRadios" id="Savings" value="s" (click)="onSelectAccount('s')">
+            <label class="form-check-label" for="Savings">
+                Savings
+            </label>
+        </div>
+    </div>
+    <div *ngIf="state==='transaction'">
+        <h3>Select Transaction</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="transactionRadios" id="enquiry" value="enquiry" (click)="onBalanceEnquiry()">
+            <label class="form-check-label" for="Cheque">
+                Balance Enquiry
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="transactionRadios" id="withdraw" value="withdraw" (click)="state = 'withdraw'">
+            <label class="form-check-label" for="Savings">
+                Withdraw
+            </label>
+        </div>
+    </div>
+    <div *ngIf="state==='balance'">
+        <h3>Balance : {{balance}}</h3>
+    </div>
+    <div *ngIf="state==='withdraw'">
+        <h3>Select Option</h3>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="amountRadios" id="five" value="five" (click)="amount='5'">
+            <label class="form-check-label" for="five">
+                $5
+            </label>
+            <input class="form-check-input" type="radio" name="amountRadios" id="ten" value="ten" (click)="amount='10'">
+            <label class="form-check-label" for="ten">
+                $10
+            </label>
+            <input class="form-check-input" type="radio" name="amountRadios" id="twenty" value="twenty" (click)="amount='20'">
+            <label class="form-check-label" for="twenty">
+                $20
+            </label>
+        </div>
+        <label for="amount">Amount</label>
+        <input type="text" class="form-control" id="amount" maxlength="4" name="amount" placeholder="Please enter card number" (keyup)="onKey($event)" [(ngModel)]="amount">
+        <button type="button" class="btn btn-primary" (click)="withdrawMoney()">Ok</button>
+    </div>
+    <br />
+    <button type="button" class="btn btn-primary" *ngIf="state!=='cardDetails'" (click)="state='cardDetails'">Cancel</button>
+</div>
