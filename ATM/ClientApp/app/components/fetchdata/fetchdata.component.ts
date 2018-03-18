@@ -55,4 +55,13 @@ export class FetchDataComponent {
             evt.srcElement.id == 'cardNumber' ? this.cardNumber = '' : this.amount = '';
         }
     }
+    //reset and display home section
+    reset(): void {
+        this.cardNumber = '';
+        this.pin = '';
+        this.amount = '';
+        this.accountType = ''
+        this.balance = '';
+        this.state = 'cardDetails'
+    }
 }
